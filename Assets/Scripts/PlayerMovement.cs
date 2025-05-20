@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private float jumpingPower = 15f;
     private bool isFacingRight = true;
     private bool doubleJump;
+   
 
     private bool isWallSliding;
     private float wallSlidingSpeed = 2f;
@@ -33,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rightParticlePos = dustParticles.transform.localPosition;
         leftParticlePos = new Vector2(-rightParticlePos.x, rightParticlePos.y);
+        
     }
 
     private void Update()

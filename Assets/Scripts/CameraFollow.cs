@@ -96,4 +96,5 @@ public class CameraFollow : MonoBehaviour
         lastTargetPosition = target.position;
         lastTargetY = target.position.y;
     }
+    
 } 

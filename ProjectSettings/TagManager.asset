@@ -6,6 +6,9 @@ TagManager:
   tags:
   - bonus
   - Checkpoint
+  - Background
+  - Enemy
+  - Weak Point
   layers:
   - Default
   - TransparentFX
