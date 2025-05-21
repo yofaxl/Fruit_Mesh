@@ -9,6 +9,7 @@ TagManager:
   - Background
   - Enemy
   - Weak Point
+  - EnemyHead
   layers:
   - Default
   - TransparentFX
