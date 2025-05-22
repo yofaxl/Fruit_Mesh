@@ -4,16 +4,15 @@ using UnityEngine.SceneManagement;
 public class LevelInitializer : MonoBehaviour
 {
     [Header("Player Settings")]
-    public GameObject playerPrefab; // Karakter prefab'ı
+    public GameObject playerInScene; // Sahnedeki gerçek Player objesi
 
     private void Start()
     {
-        // Aktif sahnenin adından level numarasını al
         string sceneName = SceneManager.GetActiveScene().name;
         if (sceneName.StartsWith("Level"))
         {
-            int levelNumber = int.Parse(sceneName.Substring(5)); // "Level" kelimesinden sonrasını al
-            SpawnPlayer(levelNumber);
+            int levelNumber = int.Parse(sceneName.Substring(5));
+            MovePlayerToSpawn(levelNumber);
         }
         else
         {
@@ -21,12 +20,10 @@ public class LevelInitializer : MonoBehaviour
         }
     }
 
-    private void SpawnPlayer(int levelNumber)
+    private void MovePlayerToSpawn(int levelNumber)
     {
-        // Sahnedeki tüm spawn point'leri bul
         SpawnPoint[] spawnPoints = FindObjectsOfType<SpawnPoint>();
-        
-        // Bu level için olan spawn point'i bul
+
         SpawnPoint targetSpawnPoint = null;
         foreach (SpawnPoint spawnPoint in spawnPoints)
         {
@@ -39,14 +36,14 @@ public class LevelInitializer : MonoBehaviour
 
         if (targetSpawnPoint != null)
         {
-            // Karakteri spawn et
-            if (playerPrefab != null)
+            if (playerInScene != null)
             {
-                Instantiate(playerPrefab, targetSpawnPoint.transform.position, targetSpawnPoint.transform.rotation);
+                playerInScene.transform.position = targetSpawnPoint.transform.position;
+                playerInScene.transform.rotation = targetSpawnPoint.transform.rotation;
             }
             else
             {
-                Debug.LogError("LevelInitializer: Player prefab is not assigned!");
+                Debug.LogError("LevelInitializer: Player reference is missing!");
             }
         }
         else
@@ -54,4 +51,4 @@ public class LevelInitializer : MonoBehaviour
             Debug.LogError($"LevelInitializer: No spawn point found for level {levelNumber}!");
         }
     }
-} 
+}
